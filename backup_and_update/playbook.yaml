@@ -1,0 +1,19 @@
+- name: Install and config rclone
+  hosts: home
+  roles:
+    - stefangweichinger.ansible_rclone  
+  vars:
+    homelab0_pw: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          62666465383562346235353265303839323964316566323636303531346130363739306335323634
+          6134353136393038363734646662366336653065656361370a636135343139353461616530636463
+          34303134353236383864346433333063316366656363353435653038366630386463623939383038
+          3031313166643836630a626566663236343266636161386238613765356466303738366638316139
+          3564
+  tasks:
+    - name: name copy rconf
+      ansible.builtin.copy:
+        src: ~/Documents/lab/backup_and_update/rclone.conf 
+        dest: /home/bernardo/.config/rclone/
+    - name: copy nextcloud contents to R2
+      ansible.builtin.shell: rclone copy /media/bernardo/EXTERNAL_USB/bernardofale/files/  backupR2:backup/ --create-empty-src-dirs
