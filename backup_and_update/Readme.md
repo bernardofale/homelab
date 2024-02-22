@@ -25,7 +25,9 @@ ansible myhosts -m ping -i inventory.ini
 # Install and configure rclone + backup
 
 cd ../backup_and_update/
+
 ansible-galaxy install stefangweichinger.ansible_rclone
+
 ansible-playbook -i inventory.ini playbook.yaml
 
 ## Updating nextcloud services
