@@ -13,8 +13,6 @@ metadata:
     io.kompose.service: pihole
   name: pihole
   namespace: pihole-ns
-  resourceVersion: "172128"
-  uid: 38264bea-e4f3-4abb-b99a-f8642604d53f
 spec:
   allocateLoadBalancerNodePorts: true
   clusterIP: 10.43.228.195
@@ -27,25 +25,25 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
   - name: "53"
-    nodePort: 31513
     port: 53
     protocol: TCP
     targetPort: 53
   - name: 53-udp
-    nodePort: 31513
     port: 53
     protocol: UDP
     targetPort: 53
   - name: "80"
-    nodePort: 32370
     port: 8080
     protocol: TCP
     targetPort: 80
   - name: "443"
-    nodePort: 30815
     port: 8443
     protocol: TCP
     targetPort: 443
+  - name: "67"
+    port: 67
+    protocol: UDP
+    targetPort: 67
   selector:
     io.kompose.service: pihole
   sessionAffinity: None
