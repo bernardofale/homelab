@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"PersistentVolumeClaim","metadata":{"annotations":{},"labels":{"io.kompose.service":"pihole-data-claim"},"name":"pihole-data-claim","namespace":"pihole-ns"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"900Mi"}}}}
+    pv.kubernetes.io/bind-completed: "yes"
+    pv.kubernetes.io/bound-by-controller: "yes"
+    volume.beta.kubernetes.io/storage-provisioner: rancher.io/local-path
+    volume.kubernetes.io/selected-node: node-01
+    volume.kubernetes.io/storage-provisioner: rancher.io/local-path
+  creationTimestamp: "2025-06-24T19:52:44Z"
+  finalizers:
+  - kubernetes.io/pvc-protection
+  labels:
+    io.kompose.service: pihole-data-claim
+  name: pihole-data-claim
+  namespace: pihole-ns
+  resourceVersion: "36045"
+  uid: 13111382-3f92-40a1-ae40-4cfb633d1526
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 900Mi
+  storageClassName: local-path
+  volumeMode: Filesystem
+  volumeName: pvc-13111382-3f92-40a1-ae40-4cfb633d1526
+status:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 900Mi
+  phase: Bound

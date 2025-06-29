@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose -f compose.yaml convert
+    kompose.version: 1.36.0 (ae2a39403)
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"kompose.cmd":"kompose -f compose.yaml convert","kompose.version":"1.36.0 (ae2a39403)"},"labels":{"io.kompose.service":"pihole"},"name":"pihole","namespace":"pihole-ns"},"spec":{"ports":[{"name":"53","port":53,"targetPort":53},{"name":"53-udp","port":53,"protocol":"UDP","targetPort":53},{"name":"80","port":8080,"targetPort":80},{"name":"443","port":8443,"targetPort":443}],"selector":{"io.kompose.service":"pihole"},"type":"LoadBalancer"}}
+  creationTimestamp: "2025-06-24T20:03:55Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    io.kompose.service: pihole
+  name: pihole
+  namespace: pihole-ns
+  resourceVersion: "172128"
+  uid: 38264bea-e4f3-4abb-b99a-f8642604d53f
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.43.228.195
+  clusterIPs:
+  - 10.43.228.195
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - name: "53"
+    nodePort: 31513
+    port: 53
+    protocol: TCP
+    targetPort: 53
+  - name: 53-udp
+    nodePort: 31513
+    port: 53
+    protocol: UDP
+    targetPort: 53
+  - name: "80"
+    nodePort: 32370
+    port: 8080
+    protocol: TCP
+    targetPort: 80
+  - name: "443"
+    nodePort: 30815
+    port: 8443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    io.kompose.service: pihole
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.1.88
+      ipMode: VIP
+    - ip: 192.168.1.89
+      ipMode: VIP
