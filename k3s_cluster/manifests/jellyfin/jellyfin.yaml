@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jellyfin 
+  namespace: jellyfin-ns 
+  labels:
+    app: jellyfin 
+spec:
+  selector:
+    matchLabels:
+      app: jellyfin 
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jellyfin 
+    spec:
+      containers:
+      - name: jellyfin 
+        image: jellyfin/jellyfin
+        ports:
+        - containerPort: 8096
+          protocol: TCP 
+        volumeMounts:
+        - name: jellyfinconfig 
+          mountPath: /config
+        volumeMounts:
+        - name: jellyfincache 
+          mountPath: /cache
+        volumeMounts:
+        - name: jellyfindata 
+          mountPath: /media
+      volumes:
+      - name: jellyfinconfig
+        persistentVolumeClaim:
+          claimName: jellyfinconfig-data-claim 
+      - name: jellyfincache
+        persistentVolumeClaim:
+          claimName: jellyfincache-data-claim
+      - name: jellyfindata
+        persistentVolumeClaim:
+          claimName: jellyfindata-data-claim
+      restartPolicy: Always
+---
+
