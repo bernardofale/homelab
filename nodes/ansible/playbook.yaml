@@ -1,0 +1,11 @@
+- name: Install netbird 
+  hosts: all 
+  vars_prompt:
+    - name: setup_key 
+      prompt: Enter the setup key
+  become: yes
+  tasks:
+    - name: Installing client 
+      ansible.builtin.shell: curl -fsSL https://pkgs.netbird.io/install.sh | sh 
+    - name: Enabling the client
+      ansible.builtin.shell: netbird up --setup-key {{ setup_key }} 

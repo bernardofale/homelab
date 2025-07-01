@@ -3,7 +3,7 @@
   become: yes
   tasks:
     - name: Install k3s server 
-      ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_TOKEN=talentedripley sh -s - 
+      ansible.builtin.shell: curl -sfL https://get.k3s.io | K3S_TLS_SAN=node-01.cogitare.cc K3S_TOKEN=talentedripley sh -s - 
 - name: Install k3s agent
   hosts: node-02
   become: yes
